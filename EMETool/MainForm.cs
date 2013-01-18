@@ -227,7 +227,8 @@ namespace EMETool
 
         private void Refreshtimer_Tick(object sender, EventArgs e)
         {
-            CheckServer();
+            if (CheckServer())
+                ReadData();
         }
 
         private void listBoxDevices_SelectedValueChanged(object sender, EventArgs e)
@@ -238,6 +239,11 @@ namespace EMETool
         private void listBoxDataBlocks_SelectedValueChanged(object sender, EventArgs e)
         {
             ReadData();
+        }
+
+        private void DataBlocksGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            label1.Text = Convert.ToString(DataBlocksGridView.CurrentCellAddress.X + DataBlocksGridView.CurrentCellAddress.Y * 10);
         }
 
        

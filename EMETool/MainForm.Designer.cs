@@ -198,6 +198,7 @@
             this.DataBlocksGridView.Name = "DataBlocksGridView";
             this.DataBlocksGridView.Size = new System.Drawing.Size(568, 268);
             this.DataBlocksGridView.TabIndex = 20;
+            this.DataBlocksGridView.SelectionChanged += new System.EventHandler(this.DataBlocksGridView_SelectionChanged);
             // 
             // Column1
             // 

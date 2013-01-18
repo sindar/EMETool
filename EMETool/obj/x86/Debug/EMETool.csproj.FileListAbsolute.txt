@@ -7,3 +7,11 @@ D:\working\VS2010\EMETool\EMETool\bin\Debug\EMETool.exe
 D:\working\VS2010\EMETool\EMETool\bin\Debug\EMETool.pdb
 D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.exe
 D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.pdb
+e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.exe
+e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.pdb
+e:\_sindar\working\VS2010\EMETool\EMETool\bin\Debug\EMETool.exe
+e:\_sindar\working\VS2010\EMETool\EMETool\bin\Debug\EMETool.pdb
+e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.csprojResolveAssemblyReference.cache
+e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.MainForm.resources
+e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.Properties.Resources.resources
+e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.csproj.GenerateResource.Cache

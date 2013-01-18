@@ -129,6 +129,38 @@ namespace EMETool
             }
         }
 
+        //Считывание значений из блоков данных
+        public void ReadData()
+        {
+            object[] Data;
+
+            try
+            {
+                Data = (object[])MbeServ.ReadData(Convert.ToInt32(htDataBlocks[listBoxDataBlocks.SelectedItem.ToString()]), 2, 0, 0, 100, 0, 65535, 0, out ptrTimeStamp, out ptrQuality);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+
+            for (int counter = 0; counter <= Data.Length - 1; counter++)
+            {
+                if (Convert.ToInt32(Data[counter]) < 0)
+                {
+                    DataBlocksGridView[counter % 10, counter / 10].Value = Convert.ToInt32(Data[counter]) + 65536;
+                }
+                else
+                {
+                    DataBlocksGridView[counter % 10, counter / 10].Value = Data[counter];
+                }
+
+            }
+
+
+        }
+
         #endregion
 
         public MainForm()
@@ -145,6 +177,12 @@ namespace EMETool
         private void MainForm_Load(object sender, EventArgs e)
         {
             GetChannels();
+
+            for (int i = 0; i < 10; i++)
+            {
+                DataBlocksGridView.Rows.Add();
+                DataBlocksGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
         }
 
         private void listBoxChannels_SelectedValueChanged(object sender, EventArgs e)
@@ -155,6 +193,11 @@ namespace EMETool
         private void listBoxDevices_SelectedValueChanged(object sender, EventArgs e)
         {
             GetDataBlocks();
+        }
+
+        private void listBoxDataBlocks_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ReadData();
         }
 
        

@@ -112,6 +112,7 @@ namespace EMETool
                 buttonStartStop.Text = "Старт";
                 return false;
             }
+        }
 
         //Считывание доступных блоков данных на выбранном устройстве
         public void GetDataBlocks()
@@ -227,6 +228,7 @@ namespace EMETool
         private void Refreshtimer_Tick(object sender, EventArgs e)
         {
             CheckServer();
+        }
 
         private void listBoxDevices_SelectedValueChanged(object sender, EventArgs e)
         {

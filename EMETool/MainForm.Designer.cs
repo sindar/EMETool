@@ -38,6 +38,9 @@
             this.listBoxChannels = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.listBoxDevices = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.listBoxDataBlocks = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,12 +115,43 @@
             this.listBoxDevices.Name = "listBoxDevices";
             this.listBoxDevices.Size = new System.Drawing.Size(173, 95);
             this.listBoxDevices.TabIndex = 15;
+            this.listBoxDevices.SelectedValueChanged += new System.EventHandler(this.listBoxDevices_SelectedValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(404, 172);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "label2";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(404, 58);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Блоки данных:";
+            // 
+            // listBoxDataBlocks
+            // 
+            this.listBoxDataBlocks.FormattingEnabled = true;
+            this.listBoxDataBlocks.Location = new System.Drawing.Point(407, 74);
+            this.listBoxDataBlocks.Name = "listBoxDataBlocks";
+            this.listBoxDataBlocks.Size = new System.Drawing.Size(173, 95);
+            this.listBoxDataBlocks.TabIndex = 17;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 434);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.listBoxDataBlocks);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBoxDevices);
             this.Controls.Add(this.label1);
@@ -145,6 +179,9 @@
         private System.Windows.Forms.ListBox listBoxChannels;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBoxDevices;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox listBoxDataBlocks;
     }
 }
 

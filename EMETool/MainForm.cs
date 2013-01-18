@@ -99,6 +99,36 @@ namespace EMETool
             }
         }
 
+        //Считывание доступных блоков данных на выбранном устройстве
+        public void GetDataBlocks()
+        {
+
+
+            try
+            {
+                NumDataBlocks = MbeServ.GetDataBlocks(Convert.ToInt32(htDevices[listBoxDevices.SelectedItem.ToString()]), ref ptrDataBlockHandles, ref ptrDataBlockNames);
+                DataBlockHandles = (object[])ptrDataBlockHandles;
+                DataBlockNames = (object[])ptrDataBlockNames;
+
+                listBoxDataBlocks.Items.Clear();
+                htDataBlocks.Clear();
+
+                int i = 0;
+                foreach (Object datablock in DataBlockNames)
+                {
+                    listBoxDataBlocks.Items.Add(datablock);
+                    htDataBlocks.Add(datablock, DataBlockHandles[i]);
+                    i++;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+
         #endregion
 
         public MainForm()
@@ -120,6 +150,11 @@ namespace EMETool
         private void listBoxChannels_SelectedValueChanged(object sender, EventArgs e)
         {
             GetDevices();
+        }
+
+        private void listBoxDevices_SelectedValueChanged(object sender, EventArgs e)
+        {
+            GetDataBlocks();
         }
 
        

@@ -50,6 +50,29 @@ namespace EMETool
         int NumDataBlocks;
         int NumProperties;
 
+        #region функции работы с драйвером
+
+        //Считывание доступных каналов
+        public void GetChannels()
+        {
+            NumChannels = MbeServ.GetChannels(ref ptrChannelHandles, ref ptrChannelNames);
+
+            ChannelHandles = (object[])ptrChannelHandles;
+            ChannelNames = (object[])ptrChannelNames;
+
+            htChannels.Clear();
+
+            int i = 0;
+            foreach (Object channel in ChannelNames)
+            {
+                listBoxChannels.Items.Add(channel);
+                htChannels.Add(channel, ChannelHandles[i]);
+                i++;
+            }
+        }
+
+        #endregion
+
         public MainForm()
         {
             InitializeComponent();
@@ -59,6 +82,11 @@ namespace EMETool
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            GetChannels();
         }
 
        

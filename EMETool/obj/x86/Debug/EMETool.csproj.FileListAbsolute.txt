@@ -1,0 +1,9 @@
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.MainForm.resources
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.Properties.Resources.resources
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\working\VS2010\EMETool\EMETool\bin\Debug\EMETool.exe
+D:\working\VS2010\EMETool\EMETool\bin\Debug\EMETool.pdb
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.exe
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.pdb

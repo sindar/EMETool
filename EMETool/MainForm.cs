@@ -239,11 +239,25 @@ namespace EMETool
         private void listBoxDataBlocks_SelectedValueChanged(object sender, EventArgs e)
         {
             ReadData();
+
+            Refreshtimer.Enabled = true;
+
+            NumProperties = MbeServ.GetProperties(1, ref ptrProperties[0]);
+            Properties = (object[])ptrProperties[0];
+            MbeServ.GetPropertyData(Convert.ToInt32(htDataBlocks[listBoxDataBlocks.SelectedItem.ToString()]), "Name", ref ptrPropertyData);
+            label2.Text = ptrPropertyData.ToString();
         }
 
         private void DataBlocksGridView_SelectionChanged(object sender, EventArgs e)
         {
-            label1.Text = Convert.ToString(DataBlocksGridView.CurrentCellAddress.X + DataBlocksGridView.CurrentCellAddress.Y * 10);
+            try
+            {
+                label1.Text = Convert.ToString(DataBlocksGridView.CurrentCellAddress.X + DataBlocksGridView.CurrentCellAddress.Y * 10);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
        

@@ -84,7 +84,6 @@
             // 
             // Refreshtimer
             // 
-            this.Refreshtimer.Enabled = true;
             this.Refreshtimer.Tick += new System.EventHandler(this.Refreshtimer_Tick);
             // 
             // label1

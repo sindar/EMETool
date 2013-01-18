@@ -67,6 +67,11 @@
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
+            // Refreshtimer
+            // 
+            this.Refreshtimer.Enabled = true;
+            this.Refreshtimer.Tick += new System.EventHandler(this.Refreshtimer_Tick);
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));

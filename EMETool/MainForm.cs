@@ -99,6 +99,21 @@ namespace EMETool
             }
         }
 
+        //Проверка запущен ли драйвер
+        public bool CheckServer()
+        {
+            if (MbeServ.Running)
+            {
+                buttonStartStop.Text = "Стоп";
+                return true;
+            }
+            else
+            {
+                buttonStartStop.Text = "Старт";
+                return false;
+            }
+        }
+
         #endregion
 
         public MainForm()
@@ -114,6 +129,7 @@ namespace EMETool
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            CheckServer();
             GetChannels();
         }
 
@@ -139,6 +155,11 @@ namespace EMETool
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Refreshtimer_Tick(object sender, EventArgs e)
+        {
+            CheckServer();
         }
 
        

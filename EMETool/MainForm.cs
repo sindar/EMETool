@@ -71,6 +71,34 @@ namespace EMETool
             }
         }
 
+        //Считывание доступных устройств на выбранном канале
+        public void GetDevices()
+        {
+            try
+            {
+                NumDevices = MbeServ.GetDevices(Convert.ToInt32(htChannels[listBoxChannels.SelectedItem.ToString()].ToString()), ref ptrDeviceHandles, ref ptrDeviceNames);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            DeviceHandles = (object[])ptrDeviceHandles;
+            DeviceNames = (object[])ptrDeviceNames;
+
+            listBoxDevices.Items.Clear();
+            htDevices.Clear();
+
+            int i = 0;
+            foreach (Object device in DeviceNames)
+            {
+                listBoxDevices.Items.Add(device);
+                htDevices.Add(device, DeviceHandles[i]);
+                i++;
+            }
+        }
+
         #endregion
 
         public MainForm()
@@ -87,6 +115,11 @@ namespace EMETool
         private void MainForm_Load(object sender, EventArgs e)
         {
             GetChannels();
+        }
+
+        private void listBoxChannels_SelectedValueChanged(object sender, EventArgs e)
+        {
+            GetDevices();
         }
 
        

@@ -38,6 +38,7 @@
             this.listBoxChannels = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.listBoxDevices = new System.Windows.Forms.ListBox();
+            this.buttonStartStop = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,11 +114,23 @@
             this.listBoxDevices.Size = new System.Drawing.Size(173, 95);
             this.listBoxDevices.TabIndex = 15;
             // 
+            // buttonStartStop
+            // 
+            this.buttonStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonStartStop.Location = new System.Drawing.Point(12, 399);
+            this.buttonStartStop.Name = "buttonStartStop";
+            this.buttonStartStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStartStop.TabIndex = 17;
+            this.buttonStartStop.Text = "Старт/Стоп";
+            this.buttonStartStop.UseVisualStyleBackColor = true;
+            this.buttonStartStop.Click += new System.EventHandler(this.buttonStartStop_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 434);
+            this.Controls.Add(this.buttonStartStop);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBoxDevices);
             this.Controls.Add(this.label1);
@@ -145,6 +158,7 @@
         private System.Windows.Forms.ListBox listBoxChannels;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBoxDevices;
+        private System.Windows.Forms.Button buttonStartStop;
     }
 }
 

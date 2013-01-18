@@ -122,6 +122,25 @@ namespace EMETool
             GetDevices();
         }
 
+        private void buttonStartStop_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!MbeServ.Running)
+                {
+                    MbeServ.Start();
+                }
+                else
+                {
+                    MbeServ.Stop();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
        
     }
 }

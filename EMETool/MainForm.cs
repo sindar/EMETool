@@ -175,6 +175,22 @@ namespace EMETool
 
         }
 
+        //Запись значений в блок данных
+        public void WriteData(int lItemOffset, object Value)
+        {
+
+            try
+            {
+                MbeServ.WriteData(Convert.ToInt32(htDataBlocks[listBoxDataBlocks.SelectedItem.ToString()]), lItemOffset, 0, 0, 65535, 0, Convert.ToUInt16(Value));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+
         #endregion
 
         public MainForm()
@@ -258,6 +274,11 @@ namespace EMETool
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void DataBlocksGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            WriteData(DataBlocksGridView.CurrentCellAddress.X + DataBlocksGridView.CurrentCellAddress.Y * 10, DataBlocksGridView.CurrentCell.Value);
         }
 
        

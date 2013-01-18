@@ -1,0 +1,15 @@
+Добавлена проверка состояния драйвера по таймеру.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch experimental
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   EMETool/MainForm.Designer.cs
+#	modified:   EMETool/MainForm.cs
+#	modified:   EMETool/bin/Debug/EMETool.exe
+#	modified:   EMETool/bin/Debug/EMETool.pdb
+#	modified:   EMETool/obj/x86/Debug/EMETool.csproj.GenerateResource.Cache
+#	modified:   EMETool/obj/x86/Debug/EMETool.exe
+#	modified:   EMETool/obj/x86/Debug/EMETool.pdb
+#

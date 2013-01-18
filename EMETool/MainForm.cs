@@ -112,6 +112,66 @@ namespace EMETool
                 buttonStartStop.Text = "Старт";
                 return false;
             }
+
+        //Считывание доступных блоков данных на выбранном устройстве
+        public void GetDataBlocks()
+        {
+
+
+            try
+            {
+                NumDataBlocks = MbeServ.GetDataBlocks(Convert.ToInt32(htDevices[listBoxDevices.SelectedItem.ToString()]), ref ptrDataBlockHandles, ref ptrDataBlockNames);
+                DataBlockHandles = (object[])ptrDataBlockHandles;
+                DataBlockNames = (object[])ptrDataBlockNames;
+
+                listBoxDataBlocks.Items.Clear();
+                htDataBlocks.Clear();
+
+                int i = 0;
+                foreach (Object datablock in DataBlockNames)
+                {
+                    listBoxDataBlocks.Items.Add(datablock);
+                    htDataBlocks.Add(datablock, DataBlockHandles[i]);
+                    i++;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+
+        //Считывание значений из блоков данных
+        public void ReadData()
+        {
+            object[] Data;
+
+            try
+            {
+                Data = (object[])MbeServ.ReadData(Convert.ToInt32(htDataBlocks[listBoxDataBlocks.SelectedItem.ToString()]), 2, 0, 0, 100, 0, 65535, 0, out ptrTimeStamp, out ptrQuality);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+
+            for (int counter = 0; counter <= Data.Length - 1; counter++)
+            {
+                if (Convert.ToInt32(Data[counter]) < 0)
+                {
+                    DataBlocksGridView[counter % 10, counter / 10].Value = Convert.ToInt32(Data[counter]) + 65536;
+                }
+                else
+                {
+                    DataBlocksGridView[counter % 10, counter / 10].Value = Data[counter];
+                }
+
+            }
+
         }
 
         #endregion
@@ -131,12 +191,19 @@ namespace EMETool
         {
             CheckServer();
             GetChannels();
+
+            for (int i = 0; i < 10; i++)
+            {
+                DataBlocksGridView.Rows.Add();
+                DataBlocksGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
         }
 
         private void listBoxChannels_SelectedValueChanged(object sender, EventArgs e)
         {
             GetDevices();
         }
+
 
         private void buttonStartStop_Click(object sender, EventArgs e)
         {
@@ -160,6 +227,15 @@ namespace EMETool
         private void Refreshtimer_Tick(object sender, EventArgs e)
         {
             CheckServer();
+
+        private void listBoxDevices_SelectedValueChanged(object sender, EventArgs e)
+        {
+            GetDataBlocks();
+        }
+
+        private void listBoxDataBlocks_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ReadData();
         }
 
        

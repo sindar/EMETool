@@ -53,7 +53,15 @@ namespace EMETool
         public MainForm()
         {
             InitializeComponent();
-            MbeServ = new EMEServer();
+            
+            try
+            {
+                MbeServ = new EMEServer();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)

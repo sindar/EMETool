@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FiletoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Refreshtimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -39,7 +41,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.listBoxDevices = new System.Windows.Forms.ListBox();
             this.buttonStartStop = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.listBoxDataBlocks = new System.Windows.Forms.ListBox();
             this.DataBlocksGridView = new System.Windows.Forms.DataGridView();
@@ -53,6 +54,7 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExportDataFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataBlocksGridView)).BeginInit();
             this.SuspendLayout();
@@ -70,15 +72,31 @@
             // FiletoolStripMenuItem
             // 
             this.FiletoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportDataToolStripMenuItem,
+            this.ImportDataToolStripMenuItem,
             this.ExitToolStripMenuItem});
             this.FiletoolStripMenuItem.Name = "FiletoolStripMenuItem";
             this.FiletoolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.FiletoolStripMenuItem.Text = "Файл";
             // 
+            // ExportDataToolStripMenuItem
+            // 
+            this.ExportDataToolStripMenuItem.Name = "ExportDataToolStripMenuItem";
+            this.ExportDataToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.ExportDataToolStripMenuItem.Text = "Выгрузить данные";
+            this.ExportDataToolStripMenuItem.Click += new System.EventHandler(this.ExportDataToolStripMenuItem_Click);
+            // 
+            // ImportDataToolStripMenuItem
+            // 
+            this.ImportDataToolStripMenuItem.Name = "ImportDataToolStripMenuItem";
+            this.ImportDataToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.ImportDataToolStripMenuItem.Text = "Загрузить данные";
+            this.ImportDataToolStripMenuItem.Click += new System.EventHandler(this.ImportDataToolStripMenuItem_Click);
+            // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -90,7 +108,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(560, 493);
+            this.label1.Location = new System.Drawing.Point(560, 590);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 14;
@@ -137,22 +155,13 @@
             // buttonStartStop
             // 
             this.buttonStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStartStop.Location = new System.Drawing.Point(12, 493);
+            this.buttonStartStop.Location = new System.Drawing.Point(12, 590);
             this.buttonStartStop.Name = "buttonStartStop";
             this.buttonStartStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStartStop.TabIndex = 17;
             this.buttonStartStop.Text = "Старт/Стоп";
             this.buttonStartStop.UseVisualStyleBackColor = true;
             this.buttonStartStop.Click += new System.EventHandler(this.buttonStartStop_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(404, 172);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "label2";
             // 
             // label5
             // 
@@ -198,7 +207,8 @@
             this.DataBlocksGridView.Location = new System.Drawing.Point(12, 199);
             this.DataBlocksGridView.MultiSelect = false;
             this.DataBlocksGridView.Name = "DataBlocksGridView";
-            this.DataBlocksGridView.Size = new System.Drawing.Size(568, 268);
+            this.DataBlocksGridView.RowHeadersWidth = 50;
+            this.DataBlocksGridView.Size = new System.Drawing.Size(568, 365);
             this.DataBlocksGridView.TabIndex = 20;
             this.DataBlocksGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataBlocksGridView_CellEndEdit);
             this.DataBlocksGridView.SelectionChanged += new System.EventHandler(this.DataBlocksGridView_SelectionChanged);
@@ -267,10 +277,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 522);
+            this.ClientSize = new System.Drawing.Size(610, 619);
             this.Controls.Add(this.buttonStartStop);
             this.Controls.Add(this.DataBlocksGridView);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.listBoxDataBlocks);
             this.Controls.Add(this.label4);
@@ -302,7 +311,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBoxDevices;
         private System.Windows.Forms.Button buttonStartStop;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListBox listBoxDataBlocks;
         private System.Windows.Forms.DataGridView DataBlocksGridView;
@@ -316,6 +324,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.ToolStripMenuItem ExportDataToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog ExportDataFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem ImportDataToolStripMenuItem;
     }
 }
 

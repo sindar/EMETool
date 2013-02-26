@@ -31,7 +31,7 @@ namespace EMETool
             OPCServ.GetChannels();
             RefreshChannelsListBox();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 13; i++)
             {
                 DataBlocksGridView.Rows.Add();
                 DataBlocksGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
@@ -88,9 +88,6 @@ namespace EMETool
                 RefreshDataBlocksGridView();
                 Refreshtimer.Enabled = true;
             }
-
-            //MbeServ.GetPropertyData(Convert.ToInt32(htDataBlocks[listBoxDataBlocks.SelectedItem.ToString()]), "Name", ref ptrPropertyData);
-            //label2.Text = ptrPropertyData.ToString();*/
         }
 
         private void DataBlocksGridView_SelectionChanged(object sender, EventArgs e)
@@ -163,15 +160,13 @@ namespace EMETool
         {
             object[] Data;
 
-            try
-            {
-                Data = OPCServ.ReadData(listBoxDataBlocks.SelectedItem.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+            Data = OPCServ.ReadData(listBoxDataBlocks.SelectedItem.ToString());
+
+            DataBlocksGridView.SelectAll();
+            
+            for (int j = 0; j < 10; j++)
+                for (int i = 0; i < 13; i++)
+                    DataBlocksGridView[j, i].Value = "";
 
             for (int counter = 0; counter <= Data.Length - 1; counter++)
             {
@@ -186,9 +181,19 @@ namespace EMETool
                 {
                     DataBlocksGridView[counter % 10, counter / 10].Value = Data[counter];
                 }*/
-
             }
+        }
 
+        private void ExportDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileOper file = new FileOper("test");
+            file.ExportData(ref OPCServ);
+        }
+
+        private void ImportDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileOper file = new FileOper("test");
+            file.ImportData(ref OPCServ);
         }
 
     }

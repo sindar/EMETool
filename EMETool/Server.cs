@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace EMETool
 {
+    
+    enum ServerObjectType { Driver = 1, Channel, Device, DataBlock}
+
     class Server
     {
         //Ссылка на экземпляр EME-сервера
@@ -31,35 +34,37 @@ namespace EMETool
         object[] ChannelHandles;
         public object[] ChannelNames { get; private set; }
         object[] DeviceHandles;
-        public object[] DeviceNames;
+        public object[] DeviceNames { get; private set; }
         object[] DataBlockHandles;
-        public object[] DataBlockNames;
+        public object[] DataBlockNames { get; private set; }
         object[] Properties;
 
         //Коллекции для отображения данных, полученных от драйвера
-        public Hashtable htChannels = new Hashtable();
-        public Hashtable htDevices = new Hashtable();
-        public Hashtable htDataBlocks = new Hashtable();
+        public Hashtable htChannels { get; private set; }
+        public Hashtable htDevices{ get; private set; }
+        public Hashtable htDataBlocks{ get; private set; }
 
         public int NumChannels { get; private set; }
         public int NumDevices {  get; private set; }
         public int NumDataBlocks {  get; private set; }
         public int NumProperties {  get; private set; }
-
+        public Byte DataBlockLength { get; private set; }
+        
         public Server()
         {
             try
             {
                 EMEServ = new EMEServer();
-
-                NumProperties = EMEServ.GetProperties(1, ref ptrProperties[0]);
-                Properties = (object[])ptrProperties[0];
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
             }
+
+            htChannels = new Hashtable();
+            htDevices = new Hashtable();
+            htDataBlocks = new Hashtable();
         }
 
         public void Start()
@@ -75,7 +80,15 @@ namespace EMETool
         //Проверка запущен ли сервер
         public bool CheckServer()
         {
-            return EMEServ.Running;
+            try
+            {
+                return EMEServ.Running;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка драйвера!" + ex.Message);
+                return false;
+            }
         }
 
         //Считывание доступных каналов
@@ -140,7 +153,6 @@ namespace EMETool
                     htDataBlocks.Add(datablock, DataBlockHandles[i]);
                     i++;
                 }
-
             }
             catch (Exception ex)
             {
@@ -154,9 +166,12 @@ namespace EMETool
         {
             object[] Data;
 
+            EMEServ.GetPropertyData(Convert.ToInt32(htDataBlocks[sDataBlock]), "Length", ref ptrPropertyData);
+            DataBlockLength = Convert.ToByte(ptrPropertyData);
+
             try
             {
-                Data = (object[])EMEServ.ReadData(Convert.ToInt32(htDataBlocks[sDataBlock]), 2, 0, 0, 100, 0, 65535, 0, out ptrTimeStamp, out ptrQuality);
+                Data = (object[])EMEServ.ReadData(Convert.ToInt32(htDataBlocks[sDataBlock]), 2, 0, 0, DataBlockLength, 0, 65535, 0, out ptrTimeStamp, out ptrQuality);
                 return Data;
             }
             catch (Exception ex)
@@ -171,13 +186,19 @@ namespace EMETool
         {
             try
             {
-                EMEServ.WriteData(Convert.ToInt32(htDataBlocks[sDataBlock]), lItemOffset, 0, 0, (float)65535, (float)0, Convert.ToInt16(Value));
+                EMEServ.WriteData(Convert.ToInt32(htDataBlocks[sDataBlock]), lItemOffset, 0, 0, 65535, 0, Convert.ToInt16(Value));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
             }
+        }
+
+        public void GetProperties(ServerObjectType objtype)
+        {
+            NumProperties = EMEServ.GetProperties((Int16)objtype, ref ptrProperties[0]);
+            Properties = (object[])ptrProperties[0];
         }
     }
 }

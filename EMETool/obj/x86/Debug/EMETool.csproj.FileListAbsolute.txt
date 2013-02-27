@@ -15,3 +15,4 @@ e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.csprojResolveAss
 e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.MainForm.resources
 e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.Properties.Resources.resources
 e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.csproj.GenerateResource.Cache
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.LoadingForm.resources

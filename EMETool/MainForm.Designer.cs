@@ -65,7 +65,7 @@
             this.FiletoolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(610, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(613, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -108,7 +108,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(560, 590);
+            this.label1.Location = new System.Drawing.Point(563, 550);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 14;
@@ -116,6 +116,8 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(12, 58);
@@ -135,6 +137,8 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(206, 58);
@@ -155,7 +159,7 @@
             // buttonStartStop
             // 
             this.buttonStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStartStop.Location = new System.Drawing.Point(12, 590);
+            this.buttonStartStop.Location = new System.Drawing.Point(12, 550);
             this.buttonStartStop.Name = "buttonStartStop";
             this.buttonStartStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStartStop.TabIndex = 17;
@@ -165,6 +169,8 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(404, 58);
@@ -175,6 +181,8 @@
             // 
             // listBoxDataBlocks
             // 
+            this.listBoxDataBlocks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxDataBlocks.FormattingEnabled = true;
             this.listBoxDataBlocks.Location = new System.Drawing.Point(407, 74);
             this.listBoxDataBlocks.Name = "listBoxDataBlocks";
@@ -208,7 +216,7 @@
             this.DataBlocksGridView.MultiSelect = false;
             this.DataBlocksGridView.Name = "DataBlocksGridView";
             this.DataBlocksGridView.RowHeadersWidth = 50;
-            this.DataBlocksGridView.Size = new System.Drawing.Size(568, 365);
+            this.DataBlocksGridView.Size = new System.Drawing.Size(571, 325);
             this.DataBlocksGridView.TabIndex = 20;
             this.DataBlocksGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataBlocksGridView_CellEndEdit);
             this.DataBlocksGridView.SelectionChanged += new System.EventHandler(this.DataBlocksGridView_SelectionChanged);
@@ -277,7 +285,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 619);
+            this.ClientSize = new System.Drawing.Size(613, 579);
             this.Controls.Add(this.buttonStartStop);
             this.Controls.Add(this.DataBlocksGridView);
             this.Controls.Add(this.label5);

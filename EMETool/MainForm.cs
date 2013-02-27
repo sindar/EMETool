@@ -27,17 +27,24 @@ namespace EMETool
 
         private void MainForm_Load(object sender, EventArgs e)
         {   
-            CheckServer();
-            OPCServ.GetChannels();
-            RefreshChannelsListBox();
-
             for (int i = 0; i < 13; i++)
             {
                 DataBlocksGridView.Rows.Add();
                 DataBlocksGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
+
+            // При загрузке формы проверяем запущен ли драйвер. 
+            if (OPCServ.CheckServer())
+            {
+                //Если запущен инициализируем каналы устройства и блоки данных. Заполняем форму.
+                OPCServ.GetChannels();
+                RefreshChannelsListBox();
+                RefreshDataBlokcsListBox();
+                RefreshDataBlokcsListBox();
+            }
         }
 
+        //Обработчик события выбора канала
         private void listBoxChannels_SelectedValueChanged(object sender, EventArgs e)
         {
             if (listBoxChannels.SelectedItem != null)
@@ -47,6 +54,27 @@ namespace EMETool
             }
         }
 
+        //Обработчик события выбора устройства
+        private void listBoxDevices_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (listBoxDevices.SelectedItem != null)
+            {
+                OPCServ.GetDataBlocks(listBoxDevices.SelectedItem.ToString());
+                RefreshDataBlokcsListBox();
+            }
+        }
+
+        //Обработчик события выбора блока данных
+        private void listBoxDataBlocks_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (listBoxDataBlocks.SelectedItem != null)
+            {
+                RefreshDataBlocksGridView(listBoxDataBlocks.SelectedItem.ToString());
+                Refreshtimer.Enabled = true;
+            }
+        }
+
+        //Кнопка запуска/останова сервера
         private void buttonStartStop_Click(object sender, EventArgs e)
         {
             try
@@ -66,30 +94,19 @@ namespace EMETool
             }
         }
 
+        //Таймер обновления данных
         private void Refreshtimer_Tick(object sender, EventArgs e)
         {
-            if (CheckServer())
-                RefreshDataBlocksGridView();
-        }
-
-        private void listBoxDevices_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (listBoxDevices.SelectedItem != null)
+            if (OPCServ.CheckServer())
             {
-                OPCServ.GetDataBlocks(listBoxDevices.SelectedItem.ToString());
-                RefreshDataBlokcsListBox();
+                buttonStartStop.Text = "Стоп";
+                RefreshDataBlocksGridView(listBoxDataBlocks.SelectedItem.ToString());
             }
-        }
+            else
+                buttonStartStop.Text = "Старт";
+        } 
 
-        private void listBoxDataBlocks_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (listBoxDataBlocks.SelectedItem != null)
-            {
-                RefreshDataBlocksGridView();
-                Refreshtimer.Enabled = true;
-            }
-        }
-
+      
         private void DataBlocksGridView_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -102,34 +119,39 @@ namespace EMETool
             }
         }
 
+        //Обработчик события ввода данных в ячейку
         private void DataBlocksGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            OPCServ.WriteData(listBoxDataBlocks.SelectedItem.ToString(), DataBlocksGridView.CurrentCellAddress.X + DataBlocksGridView.CurrentCellAddress.Y * 10, DataBlocksGridView.CurrentCell.Value);
+            Int16 iValue;
+
+            try
+            {
+                if (Convert.ToUInt16(DataBlocksGridView.CurrentCell.Value) > 32767)
+                    iValue = (Int16)(-65536 + Convert.ToUInt16(DataBlocksGridView.CurrentCell.Value));
+                else
+                    iValue = Convert.ToInt16(DataBlocksGridView.CurrentCell.Value);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Недопустимый ввод! " + ex.Message);
+                return;
+            }
+
+            OPCServ.WriteData(listBoxDataBlocks.SelectedItem.ToString(), DataBlocksGridView.CurrentCellAddress.X + DataBlocksGridView.CurrentCellAddress.Y * 10, iValue);
         }
 
-        //Проверка запущен ли драйвер
-        public bool CheckServer()
-        {
-            if (OPCServ.CheckServer())
-            {
-                buttonStartStop.Text = "Стоп";
-                return true;
-            }
-            else
-            {
-                buttonStartStop.Text = "Старт";
-                return false;
-            }
-        }
-        
         //Построение списка каналов
         public void RefreshChannelsListBox()
         {
             listBoxChannels.Items.Clear();
 
-            foreach (Object channel in OPCServ.ChannelNames)
+            if (OPCServ.NumChannels > 0)
             {
-                listBoxChannels.Items.Add(channel);
+                foreach (Object channel in OPCServ.ChannelNames)
+                {
+                    listBoxChannels.Items.Add(channel);
+                }
+                listBoxChannels.SetSelected(0, true);
             }
         }
 
@@ -137,10 +159,14 @@ namespace EMETool
         public void RefreshDevicesListBox()
         {
             listBoxDevices.Items.Clear();
-            
-            foreach (Object device in OPCServ.DeviceNames)
+
+            if (OPCServ.NumDevices > 0)
             {
-                listBoxDevices.Items.Add(device);
+                foreach (Object device in OPCServ.DeviceNames)
+                {
+                    listBoxDevices.Items.Add(device);
+                }
+                listBoxDevices.SetSelected(0, true);
             }
         }
 
@@ -148,19 +174,24 @@ namespace EMETool
         public void RefreshDataBlokcsListBox()
         {
             listBoxDataBlocks.Items.Clear();
-            
-            foreach (Object datablock in OPCServ.DataBlockNames)
+
+            if (OPCServ.NumDataBlocks > 0)
             {
-                listBoxDataBlocks.Items.Add(datablock);
-            }
+                foreach (Object datablock in OPCServ.DataBlockNames)
+                {
+                    listBoxDataBlocks.Items.Add(datablock);
+                }
+                listBoxDataBlocks.SetSelected(0, true);
+            }       
         }
 
         //Обновление таблицы данных
-        public void RefreshDataBlocksGridView()
+        public void RefreshDataBlocksGridView(string sDataBlock)
         {
             object[] Data;
 
-            Data = OPCServ.ReadData(listBoxDataBlocks.SelectedItem.ToString());
+            //Data = OPCServ.ReadData(listBoxDataBlocks.SelectedItem.ToString());
+            Data = OPCServ.ReadData(sDataBlock);
 
             DataBlocksGridView.SelectAll();
             
@@ -170,7 +201,7 @@ namespace EMETool
 
             for (int counter = 0; counter <= Data.Length - 1; counter++)
             {
-                DataBlocksGridView[counter % 10, counter / 10].Value = Data[counter];
+                DataBlocksGridView[counter % 10, counter / 10].Value = Convert.ToUInt16(Data[counter]);
                 
                 //--------------------------------Пляска с соответствиями типов интегеров---------------------------
                 /*if (Convert.ToInt32(Data[counter]) < 0)
@@ -195,6 +226,5 @@ namespace EMETool
             FileOper file = new FileOper("test");
             file.ImportData(ref OPCServ);
         }
-
     }
 }

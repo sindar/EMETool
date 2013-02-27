@@ -101,17 +101,21 @@ namespace EMETool
 
             htChannels.Clear();
 
-            int i = 0;
-            foreach (Object channel in ChannelNames)
+            if (NumChannels > 0)
             {
-                htChannels.Add(channel, ChannelHandles[i]);
-                i++;
+                int i = 0;
+                foreach (Object channel in ChannelNames)
+                {
+                    htChannels.Add(channel, ChannelHandles[i]);
+                    i++;
+                }
             }
+
             return NumChannels;
         }
 
         //Считывание доступных устройств на выбранном канале
-        public void GetDevices(string sChannel)
+        public int GetDevices(string sChannel)
         {
             try
             {
@@ -120,7 +124,7 @@ namespace EMETool
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return;
+                return -1;
             }
 
             DeviceHandles = (object[])ptrDeviceHandles;
@@ -128,16 +132,20 @@ namespace EMETool
 
             htDevices.Clear();
 
-            int i = 0;
-            foreach (Object device in DeviceNames)
+            if (NumDevices > 0)
             {
-                htDevices.Add(device, DeviceHandles[i]);
-                i++;
+                int i = 0;
+                foreach (Object device in DeviceNames)
+                {
+                    htDevices.Add(device, DeviceHandles[i]);
+                    i++;
+                }
             }
+            return NumChannels;
         }
 
         //Считывание доступных блоков данных на выбранном устройстве
-        public void GetDataBlocks(string sDevice)
+        public int GetDataBlocks(string sDevice)
         {
             try
             {
@@ -147,18 +155,22 @@ namespace EMETool
 
                 htDataBlocks.Clear();
 
-                int i = 0;
-                foreach (Object datablock in DataBlockNames)
+                if (NumDataBlocks > 0)
                 {
-                    htDataBlocks.Add(datablock, DataBlockHandles[i]);
-                    i++;
+                    int i = 0;
+                    foreach (Object datablock in DataBlockNames)
+                    {
+                        htDataBlocks.Add(datablock, DataBlockHandles[i]);
+                        i++;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return;
+                return -1;
             }
+            return NumDataBlocks;
         }
 
         //Считывание значений из блоков данных

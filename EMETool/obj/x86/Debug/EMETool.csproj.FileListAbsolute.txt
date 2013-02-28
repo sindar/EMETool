@@ -16,3 +16,7 @@ e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.MainForm.resourc
 e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.Properties.Resources.resources
 e:\_sindar\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.csproj.GenerateResource.Cache
 D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\EMETool.LoadingForm.resources
+D:\working\VS2010\EMETool\EMETool\bin\Debug\EMETool.exe.config
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+D:\working\VS2010\EMETool\EMETool\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+D:\working\VS2010\EMETool\EMETool\bin\Debug\Interop.EMEDrv.dll

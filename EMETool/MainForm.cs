@@ -41,6 +41,7 @@ namespace EMETool
                 RefreshChannelsListBox();
                 RefreshDataBlokcsListBox();
                 RefreshDataBlokcsListBox();
+                Refreshtimer.Enabled =  true;
             }
         }
 

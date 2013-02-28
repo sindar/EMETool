@@ -116,7 +116,8 @@ namespace EMETool
                     OPCServ.WriteData(sDataBlockName, i, value);
                     LoadingFormPLC.LoadProgressBar.Value++;
 
-                    for (int j = 0; j < 10000000; j++);
+                    DateTime dt1 = DateTime.Now + new System.TimeSpan(1000);
+                    while (DateTime.Now < dt1);//Пауза 100мс, чтобы драйвер не сдыхал
                 }
 
                 iDataBlockNum++;

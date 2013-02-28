@@ -1,9 +1,12 @@
 D:\working\VS2010\EMETool\EMETool\obj\x86\Release\ResolveAssemblyReference.cache
 D:\working\VS2010\EMETool\EMETool\obj\x86\Release\EMETool.MainForm.resources
 D:\working\VS2010\EMETool\EMETool\obj\x86\Release\EMETool.Properties.Resources.resources
-D:\working\VS2010\EMETool\EMETool\obj\x86\Release\GenerateResource.read.1.tlog
-D:\working\VS2010\EMETool\EMETool\obj\x86\Release\GenerateResource.write.1.tlog
 D:\working\VS2010\EMETool\EMETool\bin\Release\EMETool.exe
 D:\working\VS2010\EMETool\EMETool\bin\Release\EMETool.pdb
 D:\working\VS2010\EMETool\EMETool\obj\x86\Release\EMETool.exe
 D:\working\VS2010\EMETool\EMETool\obj\x86\Release\EMETool.pdb
+D:\working\VS2010\EMETool\EMETool\bin\Release\EMETool.exe.config
+D:\working\VS2010\EMETool\EMETool\bin\Release\Interop.EMEDrv.dll
+D:\working\VS2010\EMETool\EMETool\obj\x86\Release\EMETool.LoadingForm.resources
+D:\working\VS2010\EMETool\EMETool\obj\x86\Release\GenerateResource-ResGen.read.1.tlog
+D:\working\VS2010\EMETool\EMETool\obj\x86\Release\GenerateResource-ResGen.write.1.tlog

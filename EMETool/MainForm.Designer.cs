@@ -34,7 +34,7 @@
             this.ExportDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Refreshtimer = new System.Windows.Forms.Timer(this.components);
+            this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.buttonStartStop = new System.Windows.Forms.Button();
             this.ExportDataFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -96,13 +96,13 @@
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
-            // Refreshtimer
+            // RefreshTimer
             // 
-            this.Refreshtimer.Tick += new System.EventHandler(this.Refreshtimer_Tick);
+            this.RefreshTimer.Tick += new System.EventHandler(this.Refreshtimer_Tick);
             // 
             // label1
             // 
@@ -336,7 +336,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridView DataBlocksGridView;
-        private System.Windows.Forms.Timer Refreshtimer;
+        private System.Windows.Forms.Timer RefreshTimer;
     }
 }
 

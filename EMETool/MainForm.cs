@@ -13,6 +13,7 @@ namespace EMETool
     public partial class MainForm : Form
     {
         Server OPCServ;
+        public static string sGlobalError { get; set; }
 
         public MainForm()
         {
@@ -34,14 +35,14 @@ namespace EMETool
             }
 
             // При загрузке формы проверяем запущен ли драйвер. 
-            if (OPCServ.CheckServer())
+            if (OPCServ.CheckServer() == 1)
             {
                 //Если запущен инициализируем каналы устройства и блоки данных. Заполняем форму.
                 OPCServ.GetChannels();
                 RefreshChannelsListBox();
                 RefreshDataBlokcsListBox();
                 RefreshDataBlokcsListBox();
-                Refreshtimer.Enabled =  true;
+                RefreshTimer.Enabled =  true;
             }
         }
 
@@ -71,7 +72,7 @@ namespace EMETool
             if (listBoxDataBlocks.SelectedItem != null)
             {
                 RefreshDataBlocksGridView(listBoxDataBlocks.SelectedItem.ToString());
-                Refreshtimer.Enabled = true;
+                RefreshTimer.Enabled = true;
             }
         }
 
@@ -80,14 +81,10 @@ namespace EMETool
         {
             try
             {
-                if (!OPCServ.CheckServer())
-                {
+                if (OPCServ.CheckServer()==0)
                     OPCServ.Start();
-                }
-                else
-                {
+                else if (OPCServ.CheckServer() == 1)
                     OPCServ.Stop();
-                }
             }
             catch (Exception ex)
             {
@@ -98,16 +95,21 @@ namespace EMETool
         //Таймер обновления данных
         private void Refreshtimer_Tick(object sender, EventArgs e)
         {
-            if (OPCServ.CheckServer())
+            if (OPCServ.CheckServer() == 1)
             {
                 buttonStartStop.Text = "Стоп";
                 RefreshDataBlocksGridView(listBoxDataBlocks.SelectedItem.ToString());
             }
-            else
+            else if (OPCServ.CheckServer() == 0)
                 buttonStartStop.Text = "Старт";
+            else if ((OPCServ.CheckServer() == -1))
+            {
+                RefreshTimer.Enabled = false;
+                MessageBox.Show("Ошибка драйвера! " + sGlobalError +  "Программа будет закрыта");
+                this.Close();
+            }
         } 
 
-      
         private void DataBlocksGridView_SelectionChanged(object sender, EventArgs e)
         {
             try

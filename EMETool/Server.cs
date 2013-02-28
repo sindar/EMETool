@@ -78,16 +78,20 @@ namespace EMETool
         }
 
         //Проверка запущен ли сервер
-        public bool CheckServer()
+        public int CheckServer()
         {
             try
             {
-                return EMEServ.Running;
+                if (EMEServ.Running)
+                    return 1;
+                else
+                    return 0;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка драйвера!" + ex.Message);
-                return false;
+                MainForm.sGlobalError = ex.Message;
+                //MessageBox.Show("Ошибка драйвера!" + ex.Message);
+                return -1;
             }
         }
 

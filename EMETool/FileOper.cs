@@ -21,6 +21,7 @@ namespace EMETool
             this.sFileName = sFileName;
         }
 
+        //Выгрузка данных из ПЛК
         public void ExportData(ref Server OPCServ)
         {
             try
@@ -61,6 +62,7 @@ namespace EMETool
                 dataOut.Close();
         }
 
+        //Загрузка данных в ПЛК
         public void ImportData(ref Server OPCServ)
         {
             try
@@ -73,6 +75,10 @@ namespace EMETool
                 return;
             }
 
+            LoadingForm LoadingFormPLC = new LoadingForm();//форма отображающая прогресс загрузки
+            LoadingFormPLC.Show();
+            int iDataBlockNum = 1;
+
             foreach (string sDataBlockName in OPCServ.DataBlockNames)
             {
                 string sTemp;
@@ -80,7 +86,7 @@ namespace EMETool
                 try
                 {
                     sTemp = dataIn.ReadString();
-                    Len = dataIn.ReadByte();
+                    Len = dataIn.ReadByte();//длина блока данных
                 }
                 catch (IOException ex)
                 {
@@ -89,9 +95,12 @@ namespace EMETool
                     return;
                 }
 
+                LoadingFormPLC.LoadProgressBar.Value = 0;
+                LoadingFormPLC.label1.Text = "Загрузка " + iDataBlockNum + "-го из " + OPCServ.NumDataBlocks + " блоков данных";
+                LoadingFormPLC.Refresh();
+                
                 for (int i = 0; i < Len; i++)
                 {
-                       
                     Int16 value;
                     try
                     {
@@ -105,10 +114,16 @@ namespace EMETool
                     }
                     
                     OPCServ.WriteData(sDataBlockName, i, value);
-                    
-                    for (int j = 0; j < 10000000; j++) ;
+                    LoadingFormPLC.LoadProgressBar.Value++;
+
+                    for (int j = 0; j < 10000000; j++);
                 }
+
+                iDataBlockNum++;
             }
+
+            LoadingFormPLC.label1.Text = "Загрузка завершена...";
+            LoadingFormPLC.Refresh();
 
             if (dataIn != null)
                 dataIn.Close();

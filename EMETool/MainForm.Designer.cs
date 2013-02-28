@@ -82,15 +82,15 @@
             // ExportDataToolStripMenuItem
             // 
             this.ExportDataToolStripMenuItem.Name = "ExportDataToolStripMenuItem";
-            this.ExportDataToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.ExportDataToolStripMenuItem.Text = "Выгрузить данные";
+            this.ExportDataToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ExportDataToolStripMenuItem.Text = "Выгрузить данные из ПЛК";
             this.ExportDataToolStripMenuItem.Click += new System.EventHandler(this.ExportDataToolStripMenuItem_Click);
             // 
             // ImportDataToolStripMenuItem
             // 
             this.ImportDataToolStripMenuItem.Name = "ImportDataToolStripMenuItem";
-            this.ImportDataToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.ImportDataToolStripMenuItem.Text = "Загрузить данные";
+            this.ImportDataToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.ImportDataToolStripMenuItem.Text = "Загрузить данные в ПЛК";
             this.ImportDataToolStripMenuItem.Click += new System.EventHandler(this.ImportDataToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
@@ -314,7 +314,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem FiletoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
-        private System.Windows.Forms.Timer Refreshtimer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonStartStop;
         private System.Windows.Forms.ToolStripMenuItem ExportDataToolStripMenuItem;
@@ -337,6 +336,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridView DataBlocksGridView;
+        private System.Windows.Forms.Timer Refreshtimer;
     }
 }
 
